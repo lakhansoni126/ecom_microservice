@@ -9,22 +9,22 @@ export enum UserRole {
 export class CreateUserDto {
   @IsString()
   @MinLength(2)
-  firstName: string;
+  firstName!: string;
 
   @IsString()
   @MinLength(2)
-  lastName: string;
+  lastName!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @MinLength(8)
-  password: string;
+  password!: string;
 
   @IsEnum(UserRole)
   @IsOptional()
-  role?: UserRole = UserRole.CUSTOMER;
+  role: UserRole = UserRole.CUSTOMER;
 }
 
 export class UpdateUserDto {

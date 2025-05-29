@@ -10,27 +10,27 @@ export enum ProductStatus {
 export class CreateProductDto {
   @IsString()
   @MinLength(3)
-  name: string;
+  name!: string;
 
   @IsString()
   @MinLength(10)
-  description: string;
+  description!: string;
 
   @IsNumber()
   @IsPositive()
-  price: number;
+  price!: number;
 
   @IsNumber()
   @IsPositive()
-  quantity: number;
+  quantity!: number;
 
   @IsArray()
   @IsString({ each: true })
-  categories: string[];
+  categories!: string[];
 
   @IsEnum(ProductStatus)
   @IsOptional()
-  status?: ProductStatus = ProductStatus.DRAFT;
+  status: ProductStatus = ProductStatus.DRAFT;
 }
 
 export class UpdateProductDto {
