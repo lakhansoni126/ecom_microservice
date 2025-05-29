@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package admin;
+
+service AdminService {
+  rpc GetStats (GetStatsRequest) returns (GetStatsResponse);
+  rpc GetUserStats (GetUserStatsRequest) returns (GetUserStatsResponse);
+  rpc GetOrderStats (GetOrderStatsRequest) returns (GetOrderStatsResponse);
+  rpc GetProductStats (GetProductStatsRequest) returns (GetProductStatsResponse);
+}
+
+message GetStatsRequest {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message GetStatsResponse {
+  int32 total_users = 1;
+  int32 total_orders = 2;
+  int32 total_products = 3;
+  double total_revenue = 4;
+}
+
+message GetUserStatsRequest {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message GetUserStatsResponse {
+  int32 total_customers = 1;
+  int32 total_sellers = 2;
+  int32 new_users = 3;
+  repeated UserActivityData daily_activity = 4;
+}
+
+message GetOrderStatsRequest {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message GetOrderStatsResponse {
+  int32 total_orders = 1;
+  double total_revenue = 2;
+  double average_order_value = 3;
+  repeated OrderActivityData daily_orders = 4;
+}
+
+message GetProductStatsRequest {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message GetProductStatsResponse {
+  int32 total_products = 1;
+  int32 out_of_stock = 2;
+  repeated string top_categories = 3;
+  repeated ProductActivityData top_products = 4;
+}
+
+message UserActivityData {
+  string date = 1;
+  int32 new_users = 2;
+  int32 active_users = 3;
+}
+
+message OrderActivityData {
+  string date = 1;
+  int32 order_count = 2;
+  double revenue = 3;
+}
+
+message ProductActivityData {
+  string product_id = 1;
+  string name = 2;
+  int32 sales_count = 3;
+  double revenue = 4;
+}

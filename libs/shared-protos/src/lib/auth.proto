@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+}
+
+message RegisterRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+  string password = 4;
+  UserRole role = 5;
+}
+
+message RegisterResponse {
+  string id = 1;
+  string token = 2;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+  UserData user = 2;
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  bool valid = 1;
+  UserData user = 2;
+}
+
+message UserData {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  UserRole role = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+enum UserRole {
+  CUSTOMER = 0;
+  SELLER = 1;
+  ADMIN = 2;
+}
