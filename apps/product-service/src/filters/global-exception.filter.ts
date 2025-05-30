@@ -38,7 +38,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       message = response.message || exception.message;
       details = response.error || 'HTTP Exception';
       
-      // Map HTTP status codes to gRPC status codes
       switch (httpStatus) {
         case HttpStatus.BAD_REQUEST:
           errorCode = status.INVALID_ARGUMENT;
@@ -85,7 +84,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       details,
       stack: exception.stack,
       timestamp: new Date().toISOString(),
-      service: 'auth-service'
+      service: 'product-service'
     });
 
     return throwError(() => ({
